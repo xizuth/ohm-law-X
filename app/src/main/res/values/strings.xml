@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">Ohm Law Calcu</string>
+    <string name="action_formula">formula</string>
+    <string name="action_about">About</string>
+
+    <string name="v">V</string>
+    <string name="voltage">Voltage</string>
+
+    <string name="i">I</string>
+    <string name="current">Current</string>
+
+    <string name="ohm_symbol">Ω</string>
+    <string name="resistance">Resistance</string>
+
+
+    <array name="voltage_list">
+        <item>nV</item>
+        <item>uV</item>
+        <item>mV</item>
+        <item>V</item>
+        <item>kV</item>
+        <item>MV</item>
+    </array>
+    <array name="current_list">
+        <item>nA</item>
+        <item>uA</item>
+        <item>mA</item>
+        <item>A</item>
+        <item>kA</item>
+        <item>MA</item>
+    </array>
+    <array name="resistance_list">
+        <item>nΩ</item>
+        <item>uΩ</item>
+        <item>mΩ</item>
+        <item>Ω</item>
+        <item>kΩ</item>
+        <item>MΩ</item>
+    </array>
+
+</resources>
