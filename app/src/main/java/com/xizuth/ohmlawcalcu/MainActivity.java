@@ -1,29 +1,83 @@
 package com.xizuth.ohmlawcalcu;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
+import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.xizuth.ohmlawcalcu.util.Unit;
+import com.xizuth.ohmlawcalcu.util.Unity;
+
 import ohm.Current;
 import ohm.Resistance;
 import ohm.Voltage;
 
+import static com.xizuth.ohmlawcalcu.util.Unit.CURRENT;
+import static com.xizuth.ohmlawcalcu.util.Unit.RESISTANCE;
+import static com.xizuth.ohmlawcalcu.util.Unit.VOLTAGE;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private static final int VOLTAGE = 0;
-    private static final int CURRENT = 1;
-    private static final int RESISTANCE = 2;
-
+    private static final int FIRST = -1;
+    private static final int SECOND = -2;
     private RadioButton radioVoltage;
     private RadioButton radioCurrent;
     private RadioButton radioResistance;
+    private AdapterView.OnItemSelectedListener onItemClickListener = new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+            calculate();
+            hideKeyBoard();
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> adapterView) {
+
+        }
+    };
+    private TextWatcher textWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            calculate();
+        }
+    };
+    private TextView.OnEditorActionListener onEditorActionListener = new TextView.OnEditorActionListener() {
+        @Override
+        public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+            if (i == EditorInfo.IME_ACTION_DONE || i == EditorInfo.IME_ACTION_NEXT){
+                calculate();
+            }
+            return false;
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +86,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         loadToolbar();
         loadListenerRadio();
         configDefault();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.action_formula:
+                startActivity(new Intent(this, FormulaActivity.class));
+                break;
+            case R.id.action_about:
+                startActivity(new Intent(this, AboutActivity.class));
+                break;
+        }
+        return true;
+    }
+
+    private void loadToolbar() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
     }
 
     private void loadListenerRadio() {
@@ -48,31 +128,43 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         switch (view.getId()) {
             case R.id.radio_voltage:
-                setTypeValue(VOLTAGE);
+                setTypeValueEditText(VOLTAGE);
                 voltageSelected();
                 break;
             case R.id.radio_current:
-                setTypeValue(CURRENT);
+                setTypeValueEditText(CURRENT);
                 currentSelected();
                 break;
             case R.id.radio_ohm:
-                setTypeValue(RESISTANCE);
+                setTypeValueEditText(RESISTANCE);
                 resistanceSelected();
                 break;
         }
     }
 
-    private double getFirstValue() /*throws Exception */ {
+    private double getFirstValue() {
         EditText first = (EditText) findViewById(R.id.first_value);
-        return Double.parseDouble(first.getText().toString());
+        first.setOnEditorActionListener(onEditorActionListener);
+        String result = first.getText().toString();
+
+        if (result.isEmpty())
+            return 0.0;
+
+        return Double.parseDouble(result);
     }
 
-    private double getSecondValue() /*throws Exception*/ {
+    private double getSecondValue() {
         TextView second = (TextView) findViewById(R.id.second_value);
-        return Double.parseDouble(second.getText().toString());
+        second.setOnEditorActionListener(onEditorActionListener);
+        String result = second.getText().toString();
+
+        if (result.isEmpty())
+            return 0.0;
+
+        return Double.parseDouble(result);
     }
 
-    private void setTypeValue(int type) {
+    private void setTypeValueEditText(int type) {
         TextInputLayout first = (TextInputLayout) findViewById(R.id.first_value_main);
         TextInputLayout second = (TextInputLayout) findViewById(R.id.second_value_main);
 
@@ -129,12 +221,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         firstSpinner.setSelection(3);
         secondSpinner.setSelection(3);
 
+        firstSpinner.setOnItemSelectedListener(onItemClickListener);
+        secondSpinner.setOnItemSelectedListener(onItemClickListener);
+
     }
 
     private void voltageSelected() {
         radioSelectedStatus(VOLTAGE);
+
         double current = getFirstValue();
+        current *= getUnit(FIRST);
         double resistance = getSecondValue();
+        resistance *= getUnit(SECOND);
         double result = Voltage.calculateVoltage(current, resistance);
 
         setResultOperation(result, VOLTAGE);
@@ -144,7 +242,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         radioSelectedStatus(CURRENT);
 
         double voltage = getFirstValue();
+        voltage *= getUnit(FIRST);
         double resistance = getSecondValue();
+        resistance *= getUnit(SECOND);
         double result = Current.calculateCurrent(voltage, resistance);
 
         setResultOperation(result, CURRENT);
@@ -154,7 +254,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         radioSelectedStatus(RESISTANCE);
 
         double voltage = getFirstValue();
+        voltage *= getUnit(FIRST);
         double current = getSecondValue();
+        current *= getUnit(SECOND);
         double result = Resistance.calculateResistance(voltage, current);
 
         setResultOperation(result, RESISTANCE);
@@ -162,8 +264,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void setResultOperation(double result, int type) {
         TextView resultView = (TextView) findViewById(R.id.result);
+        String r = String.valueOf(result);
 
-        resultView.setText(String.format("%.2f %s", result, getUnit(type)));
+        if (r.equalsIgnoreCase("NaN")) {
+            resultView.setText(getText(R.string.infinite));
+        } else {
+            Unity unity = new Unity(this, result, type);
+            resultView.setText(String.format("%.2f %s", unity.getValue(), unity.getUnity()));
+        }
     }
 
     private void radioSelectedStatus(int selected) {
@@ -184,29 +292,49 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void loadToolbar() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-    }
-
-    private String getUnit(int type) {
-        String[] voltage = getResources().getStringArray(R.array.voltage_list);
-        String[] current = getResources().getStringArray(R.array.current_list);
-        String[] resistance = getResources().getStringArray(R.array.resistance_list);
-
-        if (type == CURRENT) {
-            return current[3];
-        }
-        if (type == RESISTANCE) {
-            return resistance[3];
-        } else {
-            return voltage[3];
-        }
-    }
-
     private void configDefault() {
-        setTypeValue(VOLTAGE);
+        setTypeValueEditText(VOLTAGE);
+        setListenerEditTest();
+    }
 
+    private void setListenerEditTest() {
+        EditText first = (EditText) findViewById(R.id.first_value);
+        TextView second = (TextView) findViewById(R.id.second_value);
+
+        first.addTextChangedListener(textWatcher);
+        second.addTextChangedListener(textWatcher);
+    }
+
+    private double getUnit(int position) {
+        int unit;
+
+        if (position == FIRST) {
+            unit = ((Spinner) findViewById(R.id.spinner_first_value)).getSelectedItemPosition();
+        } else {
+            unit = ((Spinner) findViewById(R.id.spinner_second_value)).getSelectedItemPosition();
+        }
+
+        return Unit.units()[unit];
+    }
+
+    private void calculate() {
+        if (radioVoltage.isChecked()) {
+            voltageSelected();
+        }
+        if (radioCurrent.isChecked()) {
+            currentSelected();
+        }
+        if (radioResistance.isChecked()) {
+            resistanceSelected();
+        }
+    }
+
+    private void hideKeyBoard(){
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 
 }
