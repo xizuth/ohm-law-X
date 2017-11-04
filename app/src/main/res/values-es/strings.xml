@@ -1,18 +1,18 @@
 <resources>
-    <string name="app_name">Ohm Law X</string>
+    <string name="app_name">Ley de Ohms X</string>
     <string name="action_formula">Formula</string>
-    <string name="action_about">About</string>
+    <string name="action_about">Más</string>
 
     <string name="v">V</string>
-    <string name="voltage">Voltage</string>
+    <string name="voltage">Voltaje</string>
 
     <string name="i">I</string>
-    <string name="current">Current</string>
+    <string name="current">Corriente</string>
 
     <string name="ohm_symbol">Ω</string>
-    <string name="resistance">Resistance</string>
+    <string name="resistance">Resistencia</string>
 
-    <string name="infinite">Infinite</string>
+    <string name="infinite">Infinito</string>
 
     <array name="voltage_list">
         <item>nV</item>
