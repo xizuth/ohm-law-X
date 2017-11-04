@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -23,6 +22,8 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.xizuth.ohmlawcalcu.admob.AdMob;
+import com.xizuth.ohmlawcalcu.admob.Key;
 import com.xizuth.ohmlawcalcu.util.Unit;
 import com.xizuth.ohmlawcalcu.util.Unity;
 
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private static final int FIRST = -1;
     private static final int SECOND = -2;
+    private AdMob adMob;
     private RadioButton radioVoltage;
     private RadioButton radioCurrent;
     private RadioButton radioResistance;
@@ -72,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView.OnEditorActionListener onEditorActionListener = new TextView.OnEditorActionListener() {
         @Override
         public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-            if (i == EditorInfo.IME_ACTION_DONE || i == EditorInfo.IME_ACTION_NEXT){
+            if (i == EditorInfo.IME_ACTION_DONE || i == EditorInfo.IME_ACTION_NEXT) {
                 calculate();
             }
             return false;
@@ -86,6 +88,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         loadToolbar();
         loadListenerRadio();
         configDefault();
+        adMob = new AdMob(this, Key.MAIN);
     }
 
     @Override
@@ -98,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.action_formula:
                 startActivity(new Intent(this, FormulaActivity.class));
                 break;
@@ -329,12 +332,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void hideKeyBoard(){
+    private void hideKeyBoard() {
         View view = this.getCurrentFocus();
         if (view != null) {
-            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
 
+    @Override
+    protected void onPause() {
+        adMob.pauseAdMob();
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        adMob.resumeAdMob();
+        super.onResume();
+    }
+
+    @Override
+    protected void onDestroy() {
+        adMob.destroyAdMob();
+        super.onDestroy();
+    }
 }

@@ -6,18 +6,23 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.xizuth.ohmlawcalcu.admob.AdMob;
+import com.xizuth.ohmlawcalcu.admob.Key;
+
 public class AboutActivity extends AppCompatActivity implements View.OnClickListener {
 
     private final String web = "http://www.alejandro-leyva.com/";
     private final String fb = "https://www.facebook.com/leyva.consult/";
     private final String tw = "https://twitter.com/jalm_x";
     private final String gh = "https://github.com/jalmx89";
+    private AdMob adMob;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
         loadListenerViews();
+        adMob = new AdMob(this, Key.ABOUT);
     }
 
     private void loadListenerViews() {
@@ -52,5 +57,23 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
                 openWeb(web);
                 break;
         }
+    }
+
+    @Override
+    protected void onPause() {
+        adMob.pauseAdMob();
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        adMob.resumeAdMob();
+        super.onResume();
+    }
+
+    @Override
+    protected void onDestroy() {
+        adMob.destroyAdMob();
+        super.onDestroy();
     }
 }

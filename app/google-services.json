@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "267760527741",
+    "firebase_url": "https://ohmlawcalcu.firebaseio.com",
+    "project_id": "ohmlawcalcu",
+    "storage_bucket": "ohmlawcalcu.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:267760527741:android:ff1d5ef6d03886d5",
+        "android_client_info": {
+          "package_name": "com.xizuth.ohmlawcalcu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "267760527741-r6tj7e2ge0kmb782aju77msfh1dheahr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAuKePMXbvrZBucaTguEoU4ZoU0qMEJ2DE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
