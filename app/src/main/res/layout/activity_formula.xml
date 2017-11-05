@@ -18,16 +18,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:src="@drawable/ohm_law"
-                android:layout_weight="1"/>
-
-            <com.google.android.gms.ads.AdView
-                xmlns:ads="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/ad_view_formula"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                ads:adSize="BANNER"
-                ads:adUnitId="@string/app_unit_id_formula" />
+                android:src="@drawable/ohm_law" />
         </LinearLayout>
 
     </ScrollView>

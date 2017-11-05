@@ -22,8 +22,6 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.xizuth.ohmlawcalcu.admob.AdMob;
-import com.xizuth.ohmlawcalcu.admob.Key;
 import com.xizuth.ohmlawcalcu.util.Unit;
 import com.xizuth.ohmlawcalcu.util.Unity;
 
@@ -39,7 +37,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private static final int FIRST = -1;
     private static final int SECOND = -2;
-    private AdMob adMob;
     private RadioButton radioVoltage;
     private RadioButton radioCurrent;
     private RadioButton radioResistance;
@@ -88,7 +85,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         loadToolbar();
         loadListenerRadio();
         configDefault();
-        adMob = new AdMob(this, Key.MAIN);
     }
 
     @Override
@@ -340,21 +336,4 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    @Override
-    protected void onPause() {
-        adMob.pauseAdMob();
-        super.onPause();
-    }
-
-    @Override
-    protected void onResume() {
-        adMob.resumeAdMob();
-        super.onResume();
-    }
-
-    @Override
-    protected void onDestroy() {
-        adMob.destroyAdMob();
-        super.onDestroy();
-    }
 }
