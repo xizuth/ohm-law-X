@@ -23,6 +23,7 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.xizuth.ohmlawcalcu.util.FormatValue;
 import com.xizuth.ohmlawcalcu.util.Unit;
 import com.xizuth.ohmlawcalcu.util.Unity;
 
@@ -103,12 +104,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
+        // TODO: 9/17/18 agregar la app web
         switch (item.getItemId()) {
             case R.id.action_formula:
                 startActivity(new Intent(this, FormulaActivity.class));
                 break;
             case R.id.action_about:
+                // TODO: 9/17/18 cambiar por otro
                 startActivity(new Intent(this, AboutActivity.class));
                 break;
             case R.id.action_clear:
@@ -301,7 +303,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             resultPower.setText(getString(R.string.infinite));
         } else {
             Unity unity = new Unity(this, result, type);
-            resultView.setText(String.format("%.2f %s", unity.getValue(), unity.getUnity()));
+            resultView.setText(String.format("%s %s", FormatValue.roundFormat(unity.getValue()), unity.getUnity()));
         }
     }
 

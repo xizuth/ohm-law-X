@@ -48,13 +48,13 @@ public final class Unit {
 
     private static String getUnit(Context context, final int unit) {
         if (unit == VOLTAGE)
-            return context.getString(R.string.voltage);
+            return context.getString(R.string.volt_symbol);
         else if (unit == CURRENT)
-            return context.getString(R.string.current);
+            return context.getString(R.string.current_symbol);
         else if (unit == RESISTANCE)
-            return context.getString(R.string.resistance);
+            return context.getString(R.string.ohm_symbol);
         else
-            return context.getString(R.string.power);
+            return context.getString(R.string.power_symbol);
     }
 
 }

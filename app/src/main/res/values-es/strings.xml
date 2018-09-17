@@ -3,14 +3,14 @@
     <string name="action_formula">Formula</string>
     <string name="action_about">Más</string>
 
-    <string name="v">V</string>
-    <string name="voltage">Voltaje</string>
+    <string name="volt_symbol">V</string>
+    <string name="voltage">Voltage</string>
 
-    <string name="i">I</string>
-    <string name="current">Corriente</string>
+    <string name="current_symbol">A</string>
+    <string name="current">Current</string>
 
     <string name="ohm_symbol">Ω</string>
-    <string name="resistance">Resistencia</string>
+    <string name="resistance">Resistance</string>
 
     <string name="power_symbol">W</string>
     <string name="power">Power</string>
