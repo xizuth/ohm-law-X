@@ -12,31 +12,23 @@
     <string name="ohm_symbol">Ω</string>
     <string name="resistance">Resistencia</string>
 
+    <string name="power_symbol">W</string>
+    <string name="power">Power</string>
+
     <string name="infinite">Infinito</string>
 
-    <array name="voltage_list">
-        <item>nV</item>
-        <item>uV</item>
-        <item>mV</item>
-        <item>V</item>
-        <item>kV</item>
-        <item>MV</item>
-    </array>
-    <array name="current_list">
-        <item>nA</item>
-        <item>uA</item>
-        <item>mA</item>
-        <item>A</item>
-        <item>kA</item>
-        <item>MA</item>
-    </array>
-    <array name="resistance_list">
-        <item>nΩ</item>
-        <item>uΩ</item>
-        <item>mΩ</item>
-        <item>Ω</item>
-        <item>kΩ</item>
-        <item>MΩ</item>
+    <string name="action_clear">Limpiar</string>
+    <string name="question_main">¿Qué deseas calcular?</string>
+
+    <array name="notation_list">
+        <item>p</item>
+        <item>n</item>
+        <item>u</item>
+        <item>m</item>
+        <item></item>
+        <item>k</item>
+        <item>M</item>
+        <item>G</item>
     </array>
 
 </resources>

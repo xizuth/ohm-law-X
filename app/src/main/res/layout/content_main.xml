@@ -8,169 +8,198 @@
     tools:context="com.xizuth.ohmlawcalcu.MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="@dimen/padding_layout"
-        android:orientation="vertical"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent">
+
 
         <LinearLayout
-            android:id="@+id/values_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="@dimen/padding_layout"
-            android:weightSum=".9">
+            android:layout_margin="@dimen/padding_layout"
+            android:orientation="vertical"
+            android:weightSum="1">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/question_main"
+                android:textColor="@color/primary_text"
+                android:textSize="@dimen/text_main_size"
+                android:textStyle="bold" />
 
             <LinearLayout
-                android:id="@+id/voltage_option"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight=".3"
-                android:gravity="center"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content">
+
+                <Switch
+                    android:id="@+id/switch_power"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/padding_half_layout"
+                    android:text="@string/power"
+                    android:gravity="end"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/values_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/padding_layout"
+                android:weightSum=".9">
 
                 <RadioButton
                     android:id="@+id/radio_voltage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight=".3"
                     android:checked="true"
-                    android:text="@string/v"
+                    android:text="@string/voltage"
                     android:textSize="@dimen/text_main_size"
                     android:textStyle="bold" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/current_option"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight=".3"
-                android:gravity="center"
-                android:orientation="horizontal">
 
                 <RadioButton
                     android:id="@+id/radio_current"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/i"
+                    android:layout_weight=".3"
+                    android:text="@string/current"
                     android:textSize="@dimen/text_main_size"
                     android:textStyle="bold" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/resistance_option"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight=".3"
-                android:gravity="center"
-                android:orientation="horizontal">
 
                 <RadioButton
                     android:id="@+id/radio_ohm"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/ohm_symbol"
+                    android:layout_weight=".3"
+                    android:text="@string/resistance"
                     android:textSize="@dimen/text_main_size"
                     android:textStyle="bold" />
+
             </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/padding_layout"
-            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="1">
+                android:layout_marginBottom="@dimen/padding_layout"
+                android:orientation="vertical">
 
-                <android.support.design.widget.TextInputLayout
-                    android:id="@+id/first_value_main"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight=".3">
+                    android:orientation="horizontal"
+                    android:weightSum="1">
 
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/first_value"
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/first_value_main"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".3">
+
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/first_value"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:hint="@string/current"
+                            android:inputType="numberSigned|numberDecimal"
+                            android:maxLines="1" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <Spinner
+                        android:id="@+id/spinner_first_value"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:hint="@string/current"
-                        android:inputType="numberSigned|numberDecimal"
-                        android:maxLines="1" />
+                        android:layout_weight=".7">
 
-                </android.support.design.widget.TextInputLayout>
+                    </Spinner>
 
-                <Spinner
-                    android:id="@+id/spinner_first_value"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight=".7">
+                </LinearLayout>
 
-                </Spinner>
 
             </LinearLayout>
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/padding_layout"
-            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="1">
+                android:layout_marginBottom="@dimen/padding_layout"
+                android:orientation="vertical">
 
-                <android.support.design.widget.TextInputLayout
-                    android:id="@+id/second_value_main"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight=".3">
+                    android:orientation="horizontal"
+                    android:weightSum="1">
 
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/second_value"
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/second_value_main"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".3">
+
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/second_value"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:hint="@string/resistance"
+                            android:inputType="numberSigned|numberDecimal"
+                            android:maxLines="1" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <Spinner
+                        android:id="@+id/spinner_second_value"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:hint="@string/resistance"
-                        android:inputType="numberSigned|numberDecimal"
-                        android:maxLines="1" />
+                        android:layout_weight=".7">
 
-                </android.support.design.widget.TextInputLayout>
+                    </Spinner>
 
-                <Spinner
-                    android:id="@+id/spinner_second_value"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight=".7">
+                </LinearLayout>
 
-                </Spinner>
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
+                <Switch
+                    android:id="@+id/switch_ohm_basic"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/resistance"
+                    android:gravity="end"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:weightSum="1"
+                android:layout_marginTop="@dimen/padding_layout">
+
+                <TextView
+                    android:id="@+id/result_power"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/secondary_text"
+                    android:text="potencia" />
+<!-- todo quitar el texto de potencia-->
+                <TextView
+                    android:id="@+id/result"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/padding_layout"
+                    android:text="0"
+                    android:textColor="@color/primary_text"
+                    android:textSize="@dimen/text_result_size" />
+
+            </LinearLayout>
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/result"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="0"
-            android:textColor="@color/primary_text"
-            android:textSize="@dimen/text_result_size" />
-
-    </LinearLayout>
-
+    </ScrollView>
 </android.support.design.widget.CoordinatorLayout>

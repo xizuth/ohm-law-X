@@ -1,9 +1,6 @@
 package com.xizuth.ohmlawcalcu.util;
 
 import android.content.Context;
-import android.util.Log;
-
-import com.xizuth.ohmlawcalcu.R;
 
 import static com.xizuth.ohmlawcalcu.util.Unit.CURRENT;
 import static com.xizuth.ohmlawcalcu.util.Unit.KILO;
@@ -11,8 +8,10 @@ import static com.xizuth.ohmlawcalcu.util.Unit.MEGA;
 import static com.xizuth.ohmlawcalcu.util.Unit.MICRO;
 import static com.xizuth.ohmlawcalcu.util.Unit.MILI;
 import static com.xizuth.ohmlawcalcu.util.Unit.NANO;
+import static com.xizuth.ohmlawcalcu.util.Unit.POWER;
 import static com.xizuth.ohmlawcalcu.util.Unit.RESISTANCE;
 import static com.xizuth.ohmlawcalcu.util.Unit.UNIT;
+import static com.xizuth.ohmlawcalcu.util.Unit.VOLTAGE;
 
 /**
  * Created by josef on 8/18/17.
@@ -21,7 +20,7 @@ import static com.xizuth.ohmlawcalcu.util.Unit.UNIT;
 public class Unity {
 
     private final Context context;
-    private final double value;
+    private double value;
     private final int type;
     private int position;
     private double result;
@@ -30,55 +29,61 @@ public class Unity {
         this.context = context;
         this.value = value;
         this.type = type;
-        setValue();
+        setNotation();
     }
 
     public double getValue() {
         return result;
     }
 
-    private void setValue() {
+    private void setNotation() {
+        int negative = 1;
+
+        if (value < 0) {
+            value = Math.abs(value);
+            negative = -1;
+        }
 
         if (value > MEGA) {
             result = value / MEGA;
-            position = Unit.units().length -1;
+            position = Unit.notation().length - 1;
         }
         if ((value < MEGA) && (value >= KILO)) {
             result = value / KILO;
-            position = Unit.units().length - 2;
+            position = Unit.notation().length - 2;
         }
         if ((value >= UNIT) && (value < KILO)) {
             result = value;
-            position = Unit.units().length - 3;
+            position = Unit.notation().length - 3;
         }
         if ((value < UNIT) && (value >= MILI)) {
             result = value / MILI;
-            position = Unit.units().length - 4;
+            position = Unit.notation().length - 4;
         }
         if ((value < MILI) && (value >= MICRO)) {
             result = value / MICRO;
-            position = Unit.units().length - 5;
+            position = Unit.notation().length - 5;
         }
         if ((value < MICRO) && (value >= NANO)) {
             result = value / NANO;
-            position = Unit.units().length - 6;
+            position = Unit.notation().length - 6;
         }
-
+        result *= negative;
     }
 
     public String getUnity() {
-        String[] voltage = context.getResources().getStringArray(R.array.voltage_list);
-        String[] current = context.getResources().getStringArray(R.array.current_list);
-        String[] resistance = context.getResources().getStringArray(R.array.resistance_list);
+        String[] voltage = Unit.getListUnitType(context, VOLTAGE);
+        String[] current = Unit.getListUnitType(context, CURRENT);
+        String[] resistance = Unit.getListUnitType(context, RESISTANCE);
+        String[] power = Unit.getListUnitType(context, POWER);
 
         if (type == CURRENT) {
             return current[position];
-        }
-        if (type == RESISTANCE) {
+        } else if (type == RESISTANCE) {
             return resistance[position];
-        } else {
+        } else if (type == VOLTAGE) {
             return voltage[position];
-        }
+        } else return power[position];
     }
 
 }

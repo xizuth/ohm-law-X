@@ -20,6 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.xizuth.ohmlawcalcu.util.Unit;
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private RadioButton radioVoltage;
     private RadioButton radioCurrent;
     private RadioButton radioResistance;
+    private static boolean powerOn = false;
     private AdapterView.OnItemSelectedListener onItemClickListener = new AdapterView.OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -71,7 +73,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView.OnEditorActionListener onEditorActionListener = new TextView.OnEditorActionListener() {
         @Override
         public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-            if (i == EditorInfo.IME_ACTION_DONE || i == EditorInfo.IME_ACTION_NEXT) {
+            if (i == EditorInfo.IME_ACTION_NEXT) {
+                calculate();
+            }
+
+            if (i == EditorInfo.IME_ACTION_DONE) {
+                hideKeyBoard();
                 calculate();
             }
             return false;
@@ -104,8 +111,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.action_about:
                 startActivity(new Intent(this, AboutActivity.class));
                 break;
+            case R.id.action_clear:
+                clearUI();
+                break;
         }
         return true;
+    }
+
+    private void clearUI() {
+        ((EditText) findViewById(R.id.first_value)).setText("");
+        ((EditText) findViewById(R.id.second_value)).setText("");
+        ((TextView) findViewById(R.id.result)).setText("-");
+        ((TextView) findViewById(R.id.result_power)).setText("-");
     }
 
     private void loadToolbar() {
@@ -117,6 +134,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         radioVoltage = (RadioButton) findViewById(R.id.radio_voltage);
         radioCurrent = (RadioButton) findViewById(R.id.radio_current);
         radioResistance = (RadioButton) findViewById(R.id.radio_ohm);
+
         radioVoltage.setOnClickListener(this);
         radioCurrent.setOnClickListener(this);
         radioResistance.setOnClickListener(this);
@@ -138,6 +156,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 setTypeValueEditText(RESISTANCE);
                 resistanceSelected();
                 break;
+            case R.id.switch_power:
+                activePower();
+        }
+    }
+
+    private void activePower() {
+        powerOn = !powerOn;
+        Switch switchOhm = findViewById(R.id.switch_ohm_basic);
+
+        if (powerOn) {
+            switchOhm.setVisibility(View.VISIBLE);
+        } else {
+            switchOhm.setVisibility(View.GONE);
         }
     }
 
@@ -191,9 +222,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void setListTypeSpinner(int type) {
-        String[] voltage = getResources().getStringArray(R.array.voltage_list);
-        String[] current = getResources().getStringArray(R.array.current_list);
-        String[] resistance = getResources().getStringArray(R.array.resistance_list);
+        String[] voltage = Unit.getListUnitType(this, VOLTAGE);
+        String[] current = Unit.getListUnitType(this, CURRENT);
+        String[] resistance = Unit.getListUnitType(this, RESISTANCE);
 
         Spinner firstSpinner = (Spinner) findViewById(R.id.spinner_first_value);
         Spinner secondSpinner = (Spinner) findViewById(R.id.spinner_second_value);
@@ -233,7 +264,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         double resistance = getSecondValue();
         resistance *= getUnit(SECOND);
         double result = Voltage.calculateVoltage(current, resistance);
-
         setResultOperation(result, VOLTAGE);
     }
 
@@ -263,10 +293,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void setResultOperation(double result, int type) {
         TextView resultView = (TextView) findViewById(R.id.result);
+        TextView resultPower = findViewById(R.id.result_power);
         String r = String.valueOf(result);
 
         if (r.equalsIgnoreCase("NaN")) {
             resultView.setText(getText(R.string.infinite));
+            resultPower.setText(getString(R.string.infinite));
         } else {
             Unity unity = new Unity(this, result, type);
             resultView.setText(String.format("%.2f %s", unity.getValue(), unity.getUnity()));
@@ -313,17 +345,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             unit = ((Spinner) findViewById(R.id.spinner_second_value)).getSelectedItemPosition();
         }
 
-        return Unit.units()[unit];
+        return Unit.notation()[unit];
     }
 
     private void calculate() {
         if (radioVoltage.isChecked()) {
             voltageSelected();
-        }
-        if (radioCurrent.isChecked()) {
+        } else if (radioCurrent.isChecked()) {
             currentSelected();
-        }
-        if (radioResistance.isChecked()) {
+        } else if (radioResistance.isChecked()) {
             resistanceSelected();
         }
     }
