@@ -4,7 +4,9 @@ App for calculate ohm's law, very easy, just one click
 ___
 
 ![power 5](https://github.com/jalmx/ohm-law-X/blob/admob2/screenshot/v2/view_empty.png)
+
 ![power 5](https://github.com/jalmx/ohm-law-X/blob/admob2/screenshot/v2/voltage.png)
+
 ![power 4](https://github.com/jalmx/ohm-law-X/blob/admob2/screenshot/v2/power_voltage_2.png)
 ![power 3](https://github.com/jalmx/ohm-law-X/blob/admob2/screenshot/v2/power_voltage.png)
 ![power 2](https://github.com/jalmx/ohm-law-X/blob/admob2/screenshot/v2/power_ohm.png)
