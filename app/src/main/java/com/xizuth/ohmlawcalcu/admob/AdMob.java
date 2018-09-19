@@ -62,9 +62,7 @@ public class AdMob {
             case Key.FORMULA:
                 adView = context.findViewById(R.id.ad_view_formula);
                 break;
-            case Key.ABOUT:
-                adView = context.findViewById(R.id.ad_view_about);
-                break;
+
         }
         AdRequest adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
