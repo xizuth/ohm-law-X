@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Ohm Law X</string>
+    <string name="app_name">Ohm\'s Law X</string>
     <string name="action_formula">Formula</string>
     <string name="action_about">About</string>
 
@@ -19,6 +19,10 @@
 
     <string name="action_clear">Clear</string>
     <string name="question_main">What do you want to calculate?</string>
+    <string name="question_main_small">Calculate?</string>
+    <string name="open_web">Open in Web</string>
+    <string name="more_app">More apps</string>
+    <string name="donate">Donate</string>
 
     <array name="notation_list">
         <item>p</item>

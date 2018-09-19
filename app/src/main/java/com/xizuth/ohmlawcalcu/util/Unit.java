@@ -19,10 +19,10 @@ public final class Unit {
     public final static long MEGA = 1000000;
     public final static long GIGA = 1000000000;
 
-    public static final int VOLTAGE = 0;
-    public static final int CURRENT = 1;
-    public static final int RESISTANCE = 2;
-    public static final int POWER = 3;
+    public static final int VOLTAGE = -1;
+    public static final int CURRENT = -2;
+    public static final int RESISTANCE = -3;
+    public static final int POWER = -4;
 
     private Unit() {
     }

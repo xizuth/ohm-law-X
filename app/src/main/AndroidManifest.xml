@@ -22,7 +22,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".FormulaActivity" />
-        <activity android:name=".AboutActivity"></activity>
     </application>
 
 </manifest>
