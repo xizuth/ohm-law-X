@@ -106,7 +106,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(this, FormulaActivity.class));
                 break;
             case R.id.action_about:
-                startActivity(new Intent(this, AboutActivity.class));
                 break;
         }
         return true;
