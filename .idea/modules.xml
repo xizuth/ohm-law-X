@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/OhmLawCalcu.iml" filepath="$PROJECT_DIR$/OhmLawCalcu.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/ohm-law-X.iml" filepath="$PROJECT_DIR$/ohm-law-X.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ohm-law-app.iml" filepath="$PROJECT_DIR$/ohm-law-app.iml" />
     </modules>
   </component>
 </project>
