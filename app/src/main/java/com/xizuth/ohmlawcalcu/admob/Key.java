@@ -1,10 +1,6 @@
 package com.xizuth.ohmlawcalcu.admob;
 
-/**
- * Created by josef on 11/4/17.
- */
-
-public class Key {
+public final class Key {
 
     private Key(){
 

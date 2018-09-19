@@ -11,7 +11,7 @@ import com.xizuth.ohmlawcalcu.R;
  * Created by josef on 11/4/17.
  */
 
-public class AdMob {
+public final class AdMob {
 
     private final static String TAG = AdMob.class.getSimpleName();
     private AdView adView;
