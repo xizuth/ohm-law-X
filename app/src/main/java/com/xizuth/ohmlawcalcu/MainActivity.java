@@ -151,6 +151,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.action_more_apps:
                 OpenURL.open(this, URL.APPS);
                 break;
+            case R.id.action_donate:
+                OpenURL.open(this,URL.DONTATE);
+                break;
         }
         return true;
     }
