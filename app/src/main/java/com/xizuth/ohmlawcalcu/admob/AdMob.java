@@ -7,10 +7,6 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.xizuth.ohmlawcalcu.R;
 
-/**
- * Created by josef on 11/4/17.
- */
-
 public final class AdMob {
 
     private final static String TAG = AdMob.class.getSimpleName();

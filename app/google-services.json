@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "267760527741-9svq0kcihf4d0go6943ohen5m4tuvn9u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.xizuth.ohmlawcalcu",
+            "certificate_hash": "96c20113a5e8cf048bd40d7baf75290bdf10f937"
+          }
+        },
+        {
+          "client_id": "267760527741-m8cvh6b651jr0u8uhch092vccinap885.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.xizuth.ohmlawcalcu",
+            "certificate_hash": "fe966d820189e61c2b703cb75022eddea4b00e5b"
+          }
+        },
+        {
           "client_id": "267760527741-r6tj7e2ge0kmb782aju77msfh1dheahr.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,13 +45,19 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "267760527741-r6tj7e2ge0kmb782aju77msfh1dheahr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2
         }
-      }
+      },
+      "admob_app_id": "ca-app-pub-1366168498409484~4602289997"
     }
   ],
   "configuration_version": "1"

@@ -24,6 +24,8 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.xizuth.ohmlawcalcu.admob.AdMob;
+import com.xizuth.ohmlawcalcu.admob.Key;
 import com.xizuth.ohmlawcalcu.util.FormatValue;
 import com.xizuth.ohmlawcalcu.util.OpenURL;
 import com.xizuth.ohmlawcalcu.util.URL;
@@ -50,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Switch switchPower;
     private Switch switchGeneral;
     private boolean powerActivate = false;
+    private AdMob adMob;
     private AdapterView.OnItemSelectedListener onItemClickListener = new AdapterView.OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -97,10 +100,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        adMob = new AdMob(this, Key.MAIN);
         loadToolbar();
         loadListenerSwitchPower();
         loadListenerRadio();
         configDefault();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        adMob.pauseAdMob();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        adMob.destroyAdMob();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        adMob.resumeAdMob();
     }
 
     @Override

@@ -7,6 +7,5 @@ public final class Key {
     }
 
     public static final int MAIN = 1;
-    public static final int ABOUT = 2;
     public static final int FORMULA = 3;
 }
