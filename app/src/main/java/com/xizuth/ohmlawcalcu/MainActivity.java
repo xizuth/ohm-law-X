@@ -3,11 +3,10 @@ package com.xizuth.ohmlawcalcu;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.TextInputLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -24,6 +23,7 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.google.android.material.textfield.TextInputLayout;
 import com.xizuth.ohmlawcalcu.util.FormatValue;
 import com.xizuth.ohmlawcalcu.util.OpenURL;
 import com.xizuth.ohmlawcalcu.util.URL;
@@ -39,6 +39,9 @@ import static com.xizuth.ohmlawcalcu.util.Unit.CURRENT;
 import static com.xizuth.ohmlawcalcu.util.Unit.POWER;
 import static com.xizuth.ohmlawcalcu.util.Unit.RESISTANCE;
 import static com.xizuth.ohmlawcalcu.util.Unit.VOLTAGE;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private static String TAG = MainActivity.class.getSimpleName();
@@ -120,14 +123,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.action_about:
                 OpenURL.open(this, URL.XIZUTH_WEB);
                 break;
-            case R.id.action_open_web:
-                OpenURL.open(this, URL.APP_WEB);
-                break;
             case R.id.action_clear:
                 clearUI();
-                break;
-            case R.id.action_more_apps:
-                OpenURL.open(this, URL.APPS);
                 break;
         }
         return true;
@@ -233,7 +230,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             result = second.getText().toString();
         }
 
-        if (result.isEmpty() || (result.length() == 1 && result.startsWith("-")))
+        if (result.isEmpty() ||
+                (result.length() == 1 &&
+                        (result.startsWith("-") || result.startsWith(".")) ||
+                        (result.length() == 2 && result.startsWith("-."))
+                ))
             return 0.0;
 
 

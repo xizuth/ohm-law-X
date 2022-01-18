@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ohm-law-X.iml" filepath="$PROJECT_DIR$/ohm-law-X.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Ohm's_Law_X.iml" filepath="$PROJECT_DIR$/.idea/modules/Ohm's_Law_X.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Ohm's_Law_X.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Ohm's_Law_X.app.iml" />
     </modules>
   </component>
 </project>

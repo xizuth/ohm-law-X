@@ -11,20 +11,7 @@
         android:id="@+id/action_formula"
         android:title="@string/action_formula"
         app:showAsAction="never" />
-    <item
-        android:id="@+id/action_open_web"
-        android:title="@string/open_web"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/action_more_apps"
-        android:title="@string/more_app"
-        app:showAsAction="never" />
-    <!--
-    <item
-        android:id="@+id/action_donate"
-        android:title="@string/donate"
-        app:showAsAction="never" />
-    -->
+
     <item
         android:id="@+id/action_about"
         android:title="@string/action_about"
